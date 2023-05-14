@@ -1,4 +1,4 @@
-from funciones import *
+from funciones.general import *
 from tablaHash import HashTable
 
 archivo = "ArchNombres1.txt"
@@ -20,7 +20,8 @@ while True:
         else:
             break
 
-tabla=HashTable(tamanio, 0)
+tabla=HashTable(tamanio, 2, 1, "")
+tabla.setPaso(3)
 for i in range(len(datos)):
     num=datos[i].strip().split(",")[0]
     tabla.ingresarDatos(int(num))
