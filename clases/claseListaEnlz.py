@@ -7,15 +7,15 @@ class ListaNoOrd:
     def estaVacia(self):
         return self.cabeza==None
     
-    def agregarFrente(self, item):
+    def agregarFrente(self, clave, item):
         '''Crea un nuevo nodo y crea un enlace con la cabeza actual de la lista.
         Luego pone el nuevo nodo como la nueva cabeza de la lista, es decir, desplaza la cabeza anterior'''
-        nuevo=Nodo(item)
+        nuevo=Nodo(clave, item)
         nuevo.setSiguiente(self.cabeza)
         self.cabeza=nuevo
 
-    def agregarFinal(self, item):
-        self.insertar(item, self.tamanio())
+    def agregarFinal(self, clave, item):
+        self.insertar(clave, item, self.tamanio())
 
     def getCabeza(self):
         return self.cabeza
@@ -25,9 +25,9 @@ class ListaNoOrd:
         actual=self.cabeza
         while actual!=None:
             if actual.getSiguiente()==None:
-                cadena+=str(actual.getInfo())
+                cadena+=f"{actual.getClave()}: {actual.getInfo()}"
             else:
-                cadena+=str(actual.getInfo())+", "
+                cadena+=f"{actual.getClave()}: {actual.getInfo()}, "
             actual=actual.getSiguiente()
         return cadena
 
@@ -39,16 +39,16 @@ class ListaNoOrd:
             actual=actual.getSiguiente()
         return i
     
-    def buscar(self, dato):
-        '''Busca un dato y retorna True al encontrarlo por primera vez o False si no esta en la lista'''
+    def buscar(self, clave):
+        '''Busca una clave y retorna True al encontrarla o False si no esta en la lista'''
         actual=self.cabeza
         while actual!=None:
-            if actual.getInfo()==dato:
+            if actual.getClave()==clave:
                 return True
             actual=actual.getSiguiente()
         return False
     
-    def insertar(self, item, pos):
+    def insertar(self, clave, item, pos):
         '''Agrega un elemento en la posición indicada. 
         Recibe los datos o carga útil del elemento y la posición en la que se desea introducir.
         la posición de los elementos actuales va de 0 hasta n - 1, 
@@ -63,14 +63,14 @@ class ListaNoOrd:
             else:
                 raise IndexError("Índice fuera del rango de la lista actual")
         if pos==0:
-            self.agregarFrente(item)
+            self.agregarFrente(clave, item)
         else:
             if tamanio<pos:
                 raise IndexError("Índice fuera del rango de la lista actual")
             else:
                 if pos<0: 
                     pos%=tamanio    # Permite utilizar índices negativos
-                nuevo=Nodo(item)
+                nuevo=Nodo(clave, item)
                 previo=None
                 actual=self.cabeza
                 for i in range(pos+1):

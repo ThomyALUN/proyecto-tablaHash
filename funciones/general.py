@@ -10,3 +10,10 @@ def cad2NumPeso(cad:str):
     for i, car in enumerate(cad):
         suma+=(i+1)*ord(car)
     return suma
+
+def cargarDatos(ruta:str, separador:str=","):
+    with open(ruta,"r", encoding="utf-8") as archivo:
+        datos=archivo.readlines()
+    for i, linea in enumerate(datos):
+        datos[i]=linea.strip().split(separador)
+    return datos

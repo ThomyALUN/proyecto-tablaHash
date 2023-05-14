@@ -1,7 +1,7 @@
 from funciones.general import *
 from clases.claseListaEnlz import ListaNoOrd
 
-class HashTable:
+class TablaHash:
 
     # Algoritmos de hashing:
         # 0: Módulo del tamaño
@@ -17,32 +17,32 @@ class HashTable:
     def __init__(self, longitud:int, tipoHash:int, tipoCol:int, ruta:str, grupDigMax:int=3, maxDigCent:int=2, paso:int=1):
         self.tamanio=longitud
         self.tabla=[None]*longitud
-        self.tablaIndex=[[None,None]]*longitud
         self.hashing=tipoHash
         self.colision=tipoCol
+        self.ruta=ruta
         self.grupDigMax=grupDigMax  # Indica la máxima cantidad de veces que se pliega un número
         self.maxDigCent=maxDigCent  # Indica la máxima cantidad de dígitos centrales que son tomados
         self.paso=paso
         self.numCol=0
 
-    def hashResiduo(self, valor:int):
-        ind=valor%self.tamanio
+    def hashResiduo(self, clave:int):
+        ind=clave%self.tamanio
         return ind
     
-    def hashPlegado(self, valor:int):
-        cantDigitos=calcNumDigitos(valor)
+    def hashPlegado(self, clave:int):
+        cantDigitos=calcNumDigitos(clave)
         grupDig=cantDigitos/self.grupDigMax
-        copiaValor=valor
+        copiaclave=clave
         suma=0
-        while copiaValor>=1:
-            suma+=copiaValor%pow(10,grupDig)
-            copiaValor//=pow(10,grupDig)
+        while copiaclave>=1:
+            suma+=copiaclave%pow(10,grupDig)
+            copiaclave//=pow(10,grupDig)
         ind=suma%self.tamanio
         return ind
     
-    def hashCentro(self, valor:int):
-        print(valor)
-        cuadrado=pow(valor, 2)
+    def hashCentro(self, clave:int):
+        print(clave)
+        cuadrado=pow(clave, 2)
         print(cuadrado)
         digCuad=calcNumDigitos(cuadrado)
         tomarAdelante=1
@@ -59,73 +59,86 @@ class HashTable:
         print(ind)
         return ind
 
-    def calcularHash(self, valor:str):
+    def calcularHash(self, clave:str):
         try:
-            int(valor)
+            int(clave)
         except ValueError:
-            valor=cad2NumPeso(valor)
+            clave=cad2NumPeso(clave)
         else:
-            valor=int(valor)
+            clave=int(clave)
 
         if self.hashing==0:
-            ind=self.hashResiduo(valor)
+            ind=self.hashResiduo(clave)
         elif self.hashing==1:
-            ind=self.hashPlegado(valor)
+            ind=self.hashPlegado(clave)
         else:
-            ind=self.hashCentro(valor)
+            ind=self.hashCentro(clave)
         return ind
 
-    def ingresarDatos(self, valor):
-        ind=self.calcularHash(valor)
-        if self.tabla[ind]==valor:
+    def ingresarDatos(self, clave, cargaUtil):
+        ind=self.calcularHash(clave)
+        if self.tabla[ind]==clave:
             pass
         elif self.tabla[ind]==None:
             if self.colision!=3:
-                self.tabla[ind]=valor
+                self.tabla[ind]=[clave, cargaUtil]
             else:
                 listaEn=ListaNoOrd()
-                listaEn.agregarFrente(valor)
+                listaEn.agregarFrente(clave, cargaUtil)
                 self.tabla[ind]=listaEn
         else:
             self.numCol+=1
             if self.colision==0:
-                self.pasoFijo(valor, ind, 1) 
+                self.pasoFijo(ind, clave, cargaUtil, 1) 
             elif self.colision==1:
-                self.pasoFijo(valor, ind, self.paso)
+                self.pasoFijo(ind, clave, cargaUtil, self.paso)
             elif self.colision==2:
-                self.pasoCuad(valor, ind)
+                self.pasoCuad(ind, clave, cargaUtil)
             else:
-                self.enlazar(valor, ind)
+                self.enlazar(ind, clave, cargaUtil)
 
-    def pasoFijo(self, valor:int, ind:int, paso:int):
+    def pasoFijo(self, ind:int, clave:int, cargaUtil, paso:int):
         for i in range(ind, (len(self.tabla))*paso+ind, paso):
             nuevoInd=i%len(self.tabla)
-            if self.tabla[nuevoInd]==valor:
+            if self.tabla[nuevoInd]==None:
+                self.tabla[nuevoInd]=[clave, cargaUtil]
+                break  
+            elif self.tabla[nuevoInd][0]==clave:
                 break
-            elif self.tabla[nuevoInd]==None:
-                self.tabla[nuevoInd]=valor
-                break   
 
-    def pasoCuad(self, valor:int, ind:int):
+    def pasoCuad(self, ind:int, clave:int, cargaUtil):
         posPosibles=[i for i in range(self.tamanio)]
         pos=0
         while len(posPosibles)>0:
             pos+=1
             nuevoInd=(ind+pow(pos,2))%self.tamanio
             if nuevoInd in posPosibles:
-                if self.tabla[nuevoInd]==valor:
-                    break
-                elif self.tabla[nuevoInd]==None:
-                    self.tabla[nuevoInd]=valor
+                if self.tabla[nuevoInd]==None:
+                    self.tabla[nuevoInd]=[clave, cargaUtil]
+                    break  
+                elif self.tabla[nuevoInd][0]==clave:
                     break
                 else:
                     posPosibles.remove(nuevoInd)
 
-    def enlazar(self, valor:int, ind:int):
+    def enlazar(self, ind:int, clave:int, cargaUtil):
         listaEn=self.tabla[ind]
-        encontrado=listaEn.buscar(valor)
+        encontrado=listaEn.buscar(clave)
         if not encontrado:
-            listaEn.agregarFinal(valor)
+            listaEn.agregarFinal(clave, cargaUtil)
+
+    def generarIndex(self):
+        partesRuta=self.ruta.split(".")
+        rutaSinFmt=partesRuta[0]
+        formato=partesRuta[1]
+        rutaFinal=rutaSinFmt+"Index"+"."+formato
+        with open(rutaFinal, "w") as archivo:
+            for linea in self.tabla:
+                if linea!=None:
+                    mensaje=f"{linea[0]}, {linea[1]}\n"
+                else:
+                    mensaje="None, None\n"
+                archivo.write(mensaje)
 
     def setPaso(self, paso:int):
         self.paso=paso
@@ -150,10 +163,10 @@ class HashTable:
         return datos
     
 if __name__=="__main__":
-    tabla=HashTable(11,0,3,"")
+    tabla=TablaHash(11,0,3,"")
     lista=[54,26,93,17,77,31,44,55,20]
-    for dato in lista:
-        tabla.ingresarDatos(dato)
+    for i,dato in enumerate(lista):
+        tabla.ingresarDatos(dato,i)
     print(tabla.getTabla())
     for dato in tabla.getTabla():
         print(dato)

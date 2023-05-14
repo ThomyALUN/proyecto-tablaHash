@@ -1,11 +1,9 @@
 from funciones.general import *
-from tablaHash import HashTable
+from tablaHash import TablaHash
 
-archivo = "ArchNombres1.txt"
+ruta = "ArchNombres1.txt"
 
-with open(archivo, "r", encoding="utf-8") as archivo:
-    datos=archivo.readlines()
-
+datos=cargarDatos(ruta)
 print(datos)
 
 while True:
@@ -20,12 +18,13 @@ while True:
         else:
             break
 
-tabla=HashTable(tamanio, 2, 1, "")
+tabla=TablaHash(tamanio, 2, 2, ruta)
 tabla.setPaso(3)
 for i in range(len(datos)):
-    num=datos[i].strip().split(",")[0]
-    tabla.ingresarDatos(int(num))
+    num=datos[i][0]
+    tabla.ingresarDatos(int(num),i+1)
 print("")
 print(tabla)
 print("")
 print(tabla.getTabla())
+tabla.generarIndex()

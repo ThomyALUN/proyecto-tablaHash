@@ -1,7 +1,10 @@
 class Nodo:
-    def __init__(self, datosIniciales, apuntadorInicial=None):
+    def __init__(self, clave, datosIniciales, apuntadorInicial=None):
+        self.clave=clave
         self.info=datosIniciales
         self.siguiente=apuntadorInicial
+    def getClave(self):
+        return self.clave
     def getInfo(self):
         return self.info
     def getSiguiente(self):
