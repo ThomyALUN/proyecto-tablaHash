@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>815</width>
+    <height>579</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>10</y>
+      <width>681</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QWidget#widget{
+background-color: rgb(16, 16, 16);
+background-color: rgb(6, 6, 6);
+	background-color: rgb(0, 76, 227);
+border-radius:20px;
+}</string>
+    </property>
+    <widget class="QPushButton" name="BIniciar">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>290</y>
+       <width>151</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#BIniciar{
+background-color: rgb(52, 107, 98);
+	background-color: rgb(173, 173, 173);
+font: 87 10pt &quot;Arial Black&quot;;
+border-radius:15px;
+font: 10pt &quot;Gill Sans Ultra Bold&quot;;
+color: rgb(0, 0, 100);
+}</string>
+     </property>
+     <property name="text">
+      <string>INICIAR</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>180</y>
+       <width>241</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 25pt &quot;Rockwell Extra Bold&quot;;</string>
+     </property>
+     <property name="text">
+      <string>HASH </string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>90</y>
+       <width>161</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/tablaHash/row.png);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QWidget" name="widget_2" native="true">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>150</y>
+       <width>141</width>
+       <height>101</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 0, 125);
+border-radius:20px;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>180</y>
+       <width>131</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 25pt &quot;Rockwell Extra Bold&quot;;</string>
+     </property>
+     <property name="text">
+      <string>TABLE</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>220</y>
+       <width>161</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/tablaHash/row.png);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>120</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(0, 0, 100);
+</string>
+     </property>
+     <property name="text">
+      <string>Alejandra</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>200</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(0, 0, 100);
+</string>
+     </property>
+     <property name="text">
+      <string>Brahian</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>290</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(0, 0, 100);
+</string>
+     </property>
+     <property name="text">
+      <string>Thomas</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>330</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(0, 0, 100);
+</string>
+     </property>
+     <property name="text">
+      <string>Jeronimo</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>160</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+
+</string>
+     </property>
+     <property name="text">
+      <string>None</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>240</y>
+       <width>111</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+</string>
+     </property>
+     <property name="text">
+      <string>None</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>110</y>
+       <width>20</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+
+</string>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>340</y>
+       <width>16</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+
+</string>
+     </property>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>240</y>
+       <width>20</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+
+</string>
+     </property>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>290</y>
+       <width>20</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+
+</string>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>200</y>
+       <width>16</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+
+</string>
+     </property>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>150</y>
+       <width>20</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 13pt &quot;Rockwell Extra Bold&quot;;
+color: rgb(227, 227, 240);
+
+</string>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QFrame" name="frame">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>681</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QFrame#frame{
+background-color: rgb(16, 16, 16);
+background-color: rgb(6, 6, 6);
+	background-color: rgb(0, 76, 227);
+border-radius:20px;
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QPushButton" name="min">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>20</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#min{
+	background-color: rgb(173, 173, 173);
+font: 16pt &quot;MS Shell Dlg 2&quot;;
+border-radius:6px;
+
+color: white;
+
+
+}</string>
+      </property>
+      <property name="text">
+       <string>-</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cerrar">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>20</y>
+        <width>41</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton#cerrar{
+background-color: rgb(255, 0, 0);
+border-radius:6px;
+
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(0, 0, 125);
+color:white;
+
+}</string>
+      </property>
+      <property name="text">
+       <string>x</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>815</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="../multimedia/iconos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="tablaHash">
+    <file>row.png</file>
+  </qresource>
+</RCC>
