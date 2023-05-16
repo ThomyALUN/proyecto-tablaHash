@@ -14,7 +14,11 @@ class TablaHash:
         # 2: Sondeo cuadrático (salto cuadrático)
         # 3: Lista enlazada
 
-    def __init__(self, longitud:int, tipoHash:int, tipoCol:int, ruta:str, grupDigMax:int=3, maxDigCent:int=2, paso:int=1):
+    def __init__(self, tipo:int, longitud:int, tipoHash:int, tipoCol:int, ruta:str, grupDigMax:int=3, maxDigCent:int=2, paso:int=1):
+        # tipo: 0 -> Tabla con carga util
+        # tipo: 1 -> Tabla de indexación
+        self.tipo=tipo
+        self.archivoCargado=False
         self.tamanio=longitud
         self.tabla=[None]*longitud
         self.hashing=tipoHash
@@ -41,9 +45,7 @@ class TablaHash:
         return ind
     
     def hashCentro(self, clave:int):
-        print(clave)
         cuadrado=pow(clave, 2)
-        print(cuadrado)
         digCuad=calcNumDigitos(cuadrado)
         tomarAdelante=1
         while digCuad > 2:
@@ -56,7 +58,6 @@ class TablaHash:
             digCuad=calcNumDigitos(cuadrado)
         medio=cuadrado
         ind=medio%self.tamanio
-        print(ind)
         return ind
 
     def calcularHash(self, clave:str):
@@ -75,29 +76,64 @@ class TablaHash:
             ind=self.hashCentro(clave)
         return ind
 
-    def ingresarDatos(self, clave, cargaUtil):
+    def ingresarDato(self, clave, cargaUtil):
         ind=self.calcularHash(clave)
-        if self.tabla[ind]==clave:
-            pass
-        elif self.tabla[ind]==None:
+        if self.tabla[ind]==None:
             if self.colision!=3:
                 self.tabla[ind]=[clave, cargaUtil]
             else:
                 listaEn=ListaNoOrd()
                 listaEn.agregarFrente(clave, cargaUtil)
                 self.tabla[ind]=listaEn
+        elif (self.colision in [0,1,2] and self.tabla[ind][0]==clave) or (self.colision==3 and self.tabla[ind].buscar(clave)):
+            pass
         else:
             self.numCol+=1
             if self.colision==0:
-                self.pasoFijo(ind, clave, cargaUtil, 1) 
+                self.insPasoFijo(ind, clave, cargaUtil, 1) 
             elif self.colision==1:
-                self.pasoFijo(ind, clave, cargaUtil, self.paso)
+                self.insPasoFijo(ind, clave, cargaUtil, self.paso)
             elif self.colision==2:
-                self.pasoCuad(ind, clave, cargaUtil)
+                self.insPasoCuad(ind, clave, cargaUtil)
             else:
                 self.enlazar(ind, clave, cargaUtil)
 
-    def pasoFijo(self, ind:int, clave:int, cargaUtil, paso:int):
+    def buscarDato(self, clave):
+        ind=self.calcularHash(clave)
+        self.pasosBus=1
+        if self.tabla[ind]==None:
+            cargaUtil=None
+        elif self.colision!=3 and self.tabla[ind][0]==clave:
+            cargaUtil=self.tabla[ind][1]
+        else:
+            if self.colision in [0,1,2]:
+                if self.colision==0:
+                    pos=self.busPasoFijo(ind, clave, 1) 
+                elif self.colision==1:
+                    pos=self.busPasoFijo(ind, clave, self.paso) 
+                else:
+                    pos=self.busPasoCuad(ind, clave)
+
+                if pos==-1:
+                    cargaUtil=None
+                else:
+                    cargaUtil=self.tabla[pos][1] 
+            else:
+                pos=self.busLista(ind, clave)
+                if pos==-1:
+                    cargaUtil=None
+                else:
+                    cargaUtil=self.tabla[ind].recuperarInfo(pos)
+        if self.tipo==0 or pos==-1:
+            return cargaUtil    # return None
+        else:
+            with open(self.ruta,"r", encoding="utf-8") as archivo:
+                datos=archivo.readlines()
+            linea=datos[cargaUtil-1].strip()
+            info=linea.split(",")[1]
+            return info
+
+    def insPasoFijo(self, ind:int, clave:int, cargaUtil, paso:int):
         for i in range(ind, (len(self.tabla))*paso+ind, paso):
             nuevoInd=i%len(self.tabla)
             if self.tabla[nuevoInd]==None:
@@ -106,7 +142,7 @@ class TablaHash:
             elif self.tabla[nuevoInd][0]==clave:
                 break
 
-    def pasoCuad(self, ind:int, clave:int, cargaUtil):
+    def insPasoCuad(self, ind:int, clave:int, cargaUtil):
         posPosibles=[i for i in range(self.tamanio)]
         pos=0
         while len(posPosibles)>0:
@@ -127,18 +163,104 @@ class TablaHash:
         if not encontrado:
             listaEn.agregarFinal(clave, cargaUtil)
 
+    def busPasoFijo(self, ind:int, clave:int, paso:int):
+        for i in range(ind, (len(self.tabla))*paso+ind, paso):
+            self.pasosBus+=1
+            nuevoInd=i%len(self.tabla)
+            if self.tabla[nuevoInd]==None:
+                return -1
+            elif self.tabla[nuevoInd][0]==clave:
+                return nuevoInd
+        return -1
+    
+    def busPasoCuad(self, ind:int, clave:int):
+        posPosibles=[i for i in range(self.tamanio)]
+        pos=0
+        while len(posPosibles)>0:
+            self.pasosBus+=1
+            pos+=1
+            nuevoInd=(ind+pow(pos,2))%self.tamanio
+            if nuevoInd in posPosibles:
+                if self.tabla[nuevoInd]==None:
+                    return -1
+                elif self.tabla[nuevoInd][0]==clave:
+                    return nuevoInd
+                else:
+                    posPosibles.remove(nuevoInd)
+        return -1
+    
+    def busLista(self, ind:int, clave:int):
+        listaEn=self.tabla[ind]
+        subInd=listaEn.indice(clave)
+        self.pasosBus+=subInd
+        return subInd
+
     def generarIndex(self):
         partesRuta=self.ruta.split(".")
         rutaSinFmt=partesRuta[0]
         formato=partesRuta[1]
         rutaFinal=rutaSinFmt+"Index"+"."+formato
         with open(rutaFinal, "w") as archivo:
+            mensaje=f"indexHash,{self.hashing},{self.colision}\n"
+            archivo.write(mensaje)
             for linea in self.tabla:
                 if linea!=None:
-                    mensaje=f"{linea[0]}, {linea[1]}\n"
+                    if self.colision in [0,1,2,]:
+                        mensaje=f"{linea[0]},{linea[1]}\n"
+                    else:
+                        mensaje=""
+                        for i in range(linea.tamanio()):
+                            mensaje+=f"{linea.recuperarClave(i)},{linea.recuperarInfo(i)}"
+                            if i<linea.tamanio()-1:
+                                mensaje+=";"
+                        mensaje+="\n"
                 else:
-                    mensaje="None, None\n"
+                    mensaje="None,None\n"
                 archivo.write(mensaje)
+
+    def cargarIndex(self, rutaIndex:str):
+        encabezado=False
+        with open(rutaIndex, "r", encoding="utf-8") as archivo:
+            datos=archivo.readlines()
+
+        primeraLinea=datos[0].strip().split(",")
+        if primeraLinea[0]=="indexHash":
+            encabezado=True
+            self.hashing=int(primeraLinea[1])
+            self.colision=int(primeraLinea[2])
+        else:
+            # Si no tiene el encabezado, se asume hashing con módulo y colisiones con prueba lineal
+            self.hashing=0
+            self.colision=0
+
+        if encabezado:
+            inicio=1
+            self.tamanio=len(datos)-1
+        else:
+            inicio=0
+            self.tamanio=len(datos)
+
+        tabla=[]
+        for linea in datos[inicio:]:
+            if self.colision!=3:
+                valores=linea.strip().split(",")
+                if valores[0]=="None":
+                    tabla.append(None)
+                else:
+                    tabla.append([int(valores[0]),int(valores[1])])
+            else:
+                nodos=linea.strip().split(";")
+                listaEn=ListaNoOrd()
+                if nodos[0].split(",")[0]=="None":
+                    tabla.append(None)
+                else:
+                    for nodo in nodos:
+                        valores=nodo.strip().split(",")
+                        listaEn.agregarFinal(int(valores[0]),int(valores[1]))
+                    tabla.append(listaEn)
+        self.tabla=tabla
+        self.archivoCargado=True
+
 
     def setPaso(self, paso:int):
         self.paso=paso
@@ -159,14 +281,17 @@ class TablaHash:
         datos="La tabla hash cuenta con los siguientes atributos:"
         datos+=f"\nTamaño: {self.getTamanio()}"
         datos+=f"\nOcupación: {self.getOcupacion()*100:.2f}%"
-        datos+=f"\nColisiones: {self.getColisiones()}"
+        if not self.archivoCargado:
+            datos+=f"\nColisiones: {self.getColisiones()}"
+        else:
+            datos+=f"\nColisiones: - - -"
         return datos
     
 if __name__=="__main__":
     tabla=TablaHash(11,0,3,"")
     lista=[54,26,93,17,77,31,44,55,20]
     for i,dato in enumerate(lista):
-        tabla.ingresarDatos(dato,i)
+        tabla.ingresarDato(dato,i)
     print(tabla.getTabla())
     for dato in tabla.getTabla():
         print(dato)

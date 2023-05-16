@@ -48,6 +48,41 @@ class ListaNoOrd:
             actual=actual.getSiguiente()
         return False
     
+    def indice(self, clave):
+        '''Busca una clave y retorna su posición en la lista'''
+        i=0
+        actual=self.cabeza
+        while actual!=None:
+            if actual.getClave()==clave:
+                return i
+            actual=actual.getSiguiente()
+            i+=1
+        return -1
+    
+    def recuperarInfo(self, pos):
+        if pos>=self.tamanio():
+            raise IndexError("El índice suministrado no existe")
+        else:
+            i=0
+        actual=self.cabeza
+        while actual!=None:
+            if i==pos:
+                return actual.getInfo()
+            actual=actual.getSiguiente()
+            i+=1
+
+    def recuperarClave(self, pos):
+        if pos>=self.tamanio():
+            raise IndexError("El índice suministrado no existe")
+        else:
+            i=0
+        actual=self.cabeza
+        while actual!=None:
+            if i==pos:
+                return actual.getClave()
+            actual=actual.getSiguiente()
+            i+=1
+    
     def insertar(self, clave, item, pos):
         '''Agrega un elemento en la posición indicada. 
         Recibe los datos o carga útil del elemento y la posición en la que se desea introducir.

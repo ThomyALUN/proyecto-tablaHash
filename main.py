@@ -18,13 +18,22 @@ while True:
         else:
             break
 
-tabla=TablaHash(tamanio, 2, 2, ruta)
+tabla=TablaHash(1, tamanio, 2, 3, ruta)
 tabla.setPaso(3)
 for i in range(len(datos)):
     num=datos[i][0]
-    tabla.ingresarDatos(int(num),i+1)
+    tabla.ingresarDato(int(num),i+1)
 print("")
 print(tabla)
 print("")
 print(tabla.getTabla())
 tabla.generarIndex()
+print(tabla.buscarDato(990))
+
+print("")
+tabla.cargarIndex("ArchNombres1Index.txt")
+print(tabla.buscarDato(990))
+print("")
+print(tabla)
+print("")
+print(tabla.getTabla())
