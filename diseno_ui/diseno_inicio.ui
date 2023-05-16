@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>815</width>
+    <width>979</width>
     <height>579</height>
    </rect>
   </property>
@@ -19,8 +19,8 @@
      <rect>
       <x>80</x>
       <y>10</y>
-      <width>681</width>
-      <height>471</height>
+      <width>871</width>
+      <height>491</height>
      </rect>
     </property>
     <property name="cursor">
@@ -37,10 +37,10 @@ border-radius:20px;
     <widget class="QPushButton" name="BIniciar">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>290</y>
-       <width>151</width>
-       <height>61</height>
+       <x>260</x>
+       <y>320</y>
+       <width>161</width>
+       <height>71</height>
       </rect>
      </property>
      <property name="cursor">
@@ -63,7 +63,7 @@ color: rgb(0, 0, 100);
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>200</x>
        <y>180</y>
        <width>241</width>
        <height>41</height>
@@ -81,7 +81,7 @@ font: 90 25pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>520</x>
        <y>90</y>
        <width>161</width>
        <height>171</height>
@@ -97,7 +97,7 @@ font: 90 25pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QWidget" name="widget_2" native="true">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>310</x>
        <y>150</y>
        <width>141</width>
        <height>101</height>
@@ -111,7 +111,7 @@ border-radius:20px;</string>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>220</x>
+       <x>320</x>
        <y>180</y>
        <width>131</width>
        <height>41</height>
@@ -129,7 +129,7 @@ font: 90 25pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>410</x>
+       <x>520</x>
        <y>220</y>
        <width>161</width>
        <height>171</height>
@@ -145,7 +145,7 @@ font: 90 25pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>550</x>
        <y>120</y>
        <width>111</width>
        <height>31</height>
@@ -165,7 +165,7 @@ color: rgb(0, 0, 100);
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>450</x>
+       <x>560</x>
        <y>200</y>
        <width>111</width>
        <height>31</height>
@@ -185,7 +185,7 @@ color: rgb(0, 0, 100);
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>450</x>
+       <x>560</x>
        <y>290</y>
        <width>111</width>
        <height>31</height>
@@ -205,7 +205,7 @@ color: rgb(0, 0, 100);
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>550</x>
        <y>330</y>
        <width>121</width>
        <height>31</height>
@@ -225,7 +225,7 @@ color: rgb(0, 0, 100);
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>570</x>
        <y>160</y>
        <width>111</width>
        <height>31</height>
@@ -246,7 +246,7 @@ color: rgb(227, 227, 240);
     <widget class="QLabel" name="label_20">
      <property name="geometry">
       <rect>
-       <x>460</x>
+       <x>570</x>
        <y>240</y>
        <width>111</width>
        <height>41</height>
@@ -266,7 +266,7 @@ color: rgb(227, 227, 240);
     <widget class="QLabel" name="label_21">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>510</x>
        <y>110</y>
        <width>20</width>
        <height>41</height>
@@ -287,7 +287,7 @@ color: rgb(227, 227, 240);
     <widget class="QLabel" name="label_22">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>510</x>
        <y>340</y>
        <width>16</width>
        <height>21</height>
@@ -308,7 +308,7 @@ color: rgb(227, 227, 240);
     <widget class="QLabel" name="label_23">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>510</x>
        <y>240</y>
        <width>20</width>
        <height>41</height>
@@ -329,7 +329,7 @@ color: rgb(227, 227, 240);
     <widget class="QLabel" name="label_24">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>510</x>
        <y>290</y>
        <width>20</width>
        <height>31</height>
@@ -350,7 +350,7 @@ color: rgb(227, 227, 240);
     <widget class="QLabel" name="label_25">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>510</x>
        <y>200</y>
        <width>16</width>
        <height>31</height>
@@ -371,7 +371,7 @@ color: rgb(227, 227, 240);
     <widget class="QLabel" name="label_26">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>510</x>
        <y>150</y>
        <width>20</width>
        <height>41</height>
@@ -394,7 +394,7 @@ color: rgb(227, 227, 240);
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>681</width>
+       <width>871</width>
        <height>51</height>
       </rect>
      </property>
@@ -415,8 +415,8 @@ border-radius:20px;
      <widget class="QPushButton" name="min">
       <property name="geometry">
        <rect>
-        <x>570</x>
-        <y>20</y>
+        <x>770</x>
+        <y>10</y>
         <width>41</width>
         <height>21</height>
        </rect>
@@ -442,8 +442,8 @@ color: white;
      <widget class="QPushButton" name="cerrar">
       <property name="geometry">
        <rect>
-        <x>620</x>
-        <y>20</y>
+        <x>820</x>
+        <y>10</y>
         <width>41</width>
         <height>21</height>
        </rect>
@@ -474,7 +474,7 @@ color:white;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>815</width>
+     <width>979</width>
      <height>21</height>
     </rect>
    </property>
