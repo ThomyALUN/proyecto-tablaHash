@@ -17,7 +17,7 @@
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>70</x>
       <y>10</y>
       <width>871</width>
       <height>491</height>
@@ -37,9 +37,9 @@ border-radius:20px;
     <widget class="QPushButton" name="BIniciar">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>320</y>
-       <width>161</width>
+       <x>270</x>
+       <y>330</y>
+       <width>141</width>
        <height>71</height>
       </rect>
      </property>
