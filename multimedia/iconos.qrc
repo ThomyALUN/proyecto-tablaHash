@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="tablaHash">
+    <file>upload.png</file>
+    <file>csv-file.png</file>
+    <file>txt-file.png</file>
     <file>row.png</file>
   </qresource>
 </RCC>
