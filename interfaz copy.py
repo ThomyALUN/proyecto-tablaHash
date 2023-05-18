@@ -48,36 +48,27 @@ class Inicio(QMainWindow):
         self.ventanaSubir = VentanaSubir()
         self.ventanaSubir.raise_()
         size = self.ventanaSubir.widget_size
-        self.widget_2 = QtWidgets.QStackedWidget()
-        self.widget_2.addWidget(self.ventanaSubir)
-        self.widget_2.setFixedSize(size)
-        rec = app.desktop().screenGeometry()
-        self.widget_2.move(int((rec.width() - self.widget_2.width()) / 2), 
-                    int((rec.height() - self.widget_2.height()) / 2))
-        
-        self.widget_2.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.widget_2.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.widget_2.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget_2.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventanaSubir.setFixedSize(size)
+        self.ventanaSubir.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.ventanaSubir.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.ventanaSubir.show()
-        self.widget_2.show()
         self.close()
-        
 
 class VentanaSubir(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.widget_2 = loadUi("diseno_ui\diseno_subir.ui", self)
-        self.widget_size = self.widget_2.size()
+        self.widget = loadUi("diseno_ui\diseno_subir.ui", self)
         self.setWindowTitle('Subir archivo')
         self.cerrar.clicked.connect(inicio.exit)
         self.min.clicked.connect(self.minimizar)
         self.frame.mouseMoveEvent = self.moveWindow
         self.BSubir.clicked.connect(self.seleccionarArchivo)    
+        self.widget_size = self.widget.size()        
 
     def seleccionarArchivo(self):
         dirPath = os.getcwd()  # Directorio de la carpeta actual
         # Buscar archivo.csv
-        ruta, _ = QFileDialog.getOpenFileName(self, "Buscar Archivo...", "C:\\", "Wanted Files (*.txt)(*.csv)")
+        ruta, _ = QFileDialog.getOpenFileName(self, "Buscar Archivo...", "C:\\", "Wanted Files (*.csv)")
         # src = cv2.imread(ruta, cv2.IMREAD_UNCHANGED) #Lee la ruta de la foto
         self.rutaCSV = ruta
         self.controladorDf = ManejoDF(self.rutaCSV)
@@ -104,6 +95,13 @@ class VentanaSubir(QMainWindow):
 
     def mousePressEvent(self, event):
         self.clickPosition = event.globalPos()
+
+    def play(self):
+        #posición del widget
+        self.videoWidget.move(629,120)
+        #self.videoWidget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.player.play()
+        self.videoWidget.show()   
         
     def mostrarVentana2(self):
         self.ventana2 = Ventana2(self.controladorDf)
