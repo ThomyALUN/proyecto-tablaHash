@@ -1,5 +1,6 @@
 from funciones.general import *
 from clases.claseListaEnlz import ListaNoOrd
+from clases.monticuloBinario import *
 
 class TablaHash:
 
@@ -103,8 +104,10 @@ class TablaHash:
         self.pasosBus=1
         if self.tabla[ind]==None:
             cargaUtil=None
+            pos=0
         elif self.colision!=3 and self.tabla[ind][0]==clave:
             cargaUtil=self.tabla[ind][1]
+            pos=0
         else:
             if self.colision in [0,1,2]:
                 if self.colision==0:
@@ -261,6 +264,22 @@ class TablaHash:
         self.tabla=tabla
         self.archivoCargado=True
 
+    def generarMonticulo(self):
+        if self.tabla:
+            mont=MonticuloMin()
+            for dato in self.tabla:
+                if dato!=None:
+                    mont.insert(dato[0])
+        self.mont=mont
+
+    def obtenerPrimeros(self, cantidad):
+        vectorOrd=[]
+        while self.mont.currentSize>0 and cantidad>0:
+            clave=self.mont.delMin()
+            datos=self.buscarDato(clave)
+            vectorOrd.append([clave, datos])
+            cantidad-=1
+        return vectorOrd
 
     def setPaso(self, paso:int):
         self.paso=paso
