@@ -48,26 +48,26 @@ class Inicio(QMainWindow):
         self.ventanaSubir = VentanaSubir()
         self.ventanaSubir.raise_()
         size = self.ventanaSubir.widget_size
-        self.widget_2 = QtWidgets.QStackedWidget()
-        self.widget_2.addWidget(self.ventanaSubir)
-        self.widget_2.setFixedSize(size)
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventanaSubir)
+        self.widget.setFixedSize(size)
         rec = app.desktop().screenGeometry()
-        self.widget_2.move(int((rec.width() - self.widget_2.width()) / 2), 
-                    int((rec.height() - self.widget_2.height()) / 2))
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
         
-        self.widget_2.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.widget_2.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.widget_2.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget_2.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
         self.ventanaSubir.show()
-        self.widget_2.show()
+        self.widget.show()
         self.close()
         
 
 class VentanaSubir(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.widget_2 = loadUi("diseno_ui\diseno_subir.ui", self)
-        self.widget_size = self.widget_2.size()
+        self.widget = loadUi("diseno_ui\diseno_subir.ui", self)
+        self.widget_size = self.widget.size()
         self.setWindowTitle('Subir archivo')
         self.cerrar.clicked.connect(inicio.exit)
         self.min.clicked.connect(self.minimizar)
@@ -79,22 +79,15 @@ class VentanaSubir(QMainWindow):
         # Buscar archivo.csv
         ruta, _ = QFileDialog.getOpenFileName(self, "Buscar Archivo...", "C:\\", "Wanted Files (*.txt)(*.csv)")
         # src = cv2.imread(ruta, cv2.IMREAD_UNCHANGED) #Lee la ruta de la foto
-        self.rutaCSV = ruta
-        self.controladorDf = ManejoDF(self.rutaCSV)
+        self.rutaArchivo = ruta
+        #self.controladorDf = ManejoDF(self.rutaCSV)
         #Devuelve la excepción que hay en ManejoDF
-        self.mensaje = self.controladorDf.leerCSV(ruta)
-        if self.mensaje != None:
-            self.mostrarAdvertencia()
-            
-        else:
-           self.mostrarVentana2()
-            
-            
-        print(self.rutaCSV)
-        
+        #self.mensaje = self.controladorDf.leerCSV(ruta)
+        self.mostrarVentana3()
+                    
     
     def minimizar(self):
-        self.showMinimized()
+        inicio.widget.showMinimized()
 
     def moveWindow(self, e):
         if e.buttons() == Qt.LeftButton:
@@ -105,18 +98,123 @@ class VentanaSubir(QMainWindow):
     def mousePressEvent(self, event):
         self.clickPosition = event.globalPos()
         
-    def mostrarVentana2(self):
-        self.ventana2 = Ventana2(self.controladorDf)
-        self.ventana2.raise_()
-        self.ventana2.setWindowFlag(QtCore.Qt.FramelessWindowHint)
-        self.ventana2.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.ventana2.show()
-        self.close() 
-        self.player.stop()
+    def mostrarVentana3(self):
+        self.ventana3 = Ventana3()
+        self.ventana3.raise_()
+        size = self.ventana3.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana3)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana3.show()
+        self.widget.show()
+        self.close()
 
     def mostrarAdvertencia(self):
         self.advertencia = Advertencia(self.mensaje)
         self.advertencia.show()
+        
+class Ventana3(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.widget = loadUi("diseno_ui\diseno_ventana3.ui", self)
+        self.widget_size = self.widget.size()
+        self.setWindowTitle('ventana 3')
+        self.cerrar.clicked.connect(inicio.exit)
+        self.min.clicked.connect(self.minimizar)
+        self.frame.mouseMoveEvent = self.moveWindow
+        self.BSiguiente.clicked.connect(self.mostrarVentana4)
+    
+    def minimizar(self):
+        inicio.ventanaSubir.widget.showMinimized()
+
+    def moveWindow(self, e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos() + e.globalPos() - self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+
+    #def mostrarAdvertencia(self):
+    #    self.advertencia = Advertencia(self.mensaje)
+    #    self.advertencia.show()
+    
+    def mostrarVentana4(self):
+        self.ventana4 = Ventana4()
+        self.ventana4.raise_()
+        size = self.ventana4.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana4)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana4.show()
+        self.widget.show()
+        self.close()
+    
+    
+class Ventana4(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.widget = loadUi("diseno_ui\diseno_ventana4.ui", self)
+        self.widget_size = self.widget.size()
+        self.setWindowTitle('ventana 4')
+        self.cerrar.clicked.connect(inicio.exit)
+        self.min.clicked.connect(self.minimizar)
+        self.frame.mouseMoveEvent = self.moveWindow
+        #self.BSiguiente.clicked.connect(self.mostrarVentana5)
+        self.BAtras.clicked.connect(self.mostrarVentana3)
+            
+    
+    def minimizar(self):
+        inicio.ventanaSubir.ventana3.widget.showMinimized()
+
+    def moveWindow(self, e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos() + e.globalPos() - self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+
+    #def mostrarAdvertencia(self):
+    #    self.advertencia = Advertencia(self.mensaje)
+    #    self.advertencia.show()
+    
+    def mostrarVentana3(self):
+        self.ventana3 = Ventana3()
+        self.ventana3.raise_()
+        size = self.ventana3.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana3)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana3.show()
+        self.widget.show()
+        self.close()
+    
+
+    
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     inicio = Inicio()
