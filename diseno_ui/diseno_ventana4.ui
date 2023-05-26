@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>880</width>
-    <height>552</height>
+    <width>901</width>
+    <height>548</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -162,118 +162,6 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>190</y>
-       <width>113</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(223, 223, 223);
-border-radius:6px;</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>190</y>
-       <width>261</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
-
-color: rgb(0, 0, 115);
-;
-font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
-     </property>
-     <property name="text">
-      <string>TAMAÑO DE LA TABLA</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>250</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(223, 223, 223);
-border-radius:6px;
-color: white</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>250</y>
-       <width>221</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
-
-color: rgb(0, 0, 115);
-font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
-     </property>
-     <property name="text">
-      <string>TIPO DE HASHING</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="comboBox_2">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>309</y>
-       <width>111</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(223, 223, 223);
-border-radius:6px;
-color: white</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>310</y>
-       <width>251</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
-
-color: rgb(0, 0, 115);
-;
-font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
-     </property>
-     <property name="text">
-      <string>TIPO DE COLISIONES</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="BSiguiente">
      <property name="geometry">
       <rect>
@@ -293,6 +181,66 @@ font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
       <string/>
      </property>
     </widget>
+    <widget class="QListWidget" name="listWidget">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>80</y>
+       <width>381</width>
+       <height>351</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(0, 0, 125);
+color:white;
+font: 75 14pt &quot;Berlin Sans FB Demi&quot;;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="BAtras">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>230</y>
+       <width>51</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border-image: url(:/tablaHash/proximo.png);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>65</y>
+       <width>381</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="line_2">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>410</y>
+       <width>381</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -300,7 +248,7 @@ font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>880</width>
+     <width>901</width>
      <height>21</height>
     </rect>
    </property>
