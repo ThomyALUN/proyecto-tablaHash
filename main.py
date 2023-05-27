@@ -31,7 +31,7 @@ tabla.generarIndex()
 print(tabla.buscarDato(990))
 
 print("")
-tabla.cargarIndex("ArchNombres1Index.txt")
+tabla.cargarIndex("ArchNombres1Index.txt")  
 print(tabla.buscarDato(990))
 print("")
 print(tabla)

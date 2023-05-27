@@ -1,10 +1,13 @@
 from clases.claseNodo import Nodo
 
 class ListaNoOrd:
+    '''Clase lista enlazada no ordenada. Maneja todos los métodos necesarios para su funcionamiento.'''
     def __init__(self):
+        '''Método constructor de la clase lista ordenada no enlazada'''
         self.cabeza=None
 
     def estaVacia(self):
+        '''Revisa si la lista no tiene elementos y retorna un valor booleano'''
         return self.cabeza==None
     
     def agregarFrente(self, clave, item):
@@ -15,12 +18,15 @@ class ListaNoOrd:
         self.cabeza=nuevo
 
     def agregarFinal(self, clave, item):
+        '''Crea un nuevo nodo y lo enlaza al final de la lista'''
         self.insertar(clave, item, self.tamanio())
 
     def getCabeza(self):
+        '''Retorna el nodo presente en la cabeza de la lista'''
         return self.cabeza
     
     def recorrer(self):
+        '''Retorna una cadena con las parejas {clave : carga util} de los nodos presentes en la lista'''
         cadena=""
         actual=self.cabeza
         while actual!=None:
@@ -32,6 +38,7 @@ class ListaNoOrd:
         return cadena
 
     def tamanio(self):
+        '''Retorna el tamaño (cantidad de elementos) de la lista enlazada'''
         i=0
         actual=self.cabeza
         while actual!=None:
@@ -60,6 +67,7 @@ class ListaNoOrd:
         return -1
     
     def recuperarInfo(self, pos):
+        '''Retorna la carga útil del nodo ubicado en la posición seleccionada'''
         if pos>=self.tamanio():
             raise IndexError("El índice suministrado no existe")
         else:
@@ -72,6 +80,7 @@ class ListaNoOrd:
             i+=1
 
     def recuperarClave(self, pos):
+        '''Retorna la clave del nodo ubicado en la posición seleccionada'''
         if pos>=self.tamanio():
             raise IndexError("El índice suministrado no existe")
         else:
@@ -171,4 +180,5 @@ class ListaNoOrd:
         raise ValueError("El valor ingresado para remover no ha sido encontrado")
     
     def __str__(self) -> str:
+        '''Devuelve una cadena cuando se intenta mostrar un objeto de la clase mediante la función print()'''
         return self.recorrer()
