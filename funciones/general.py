@@ -16,4 +16,4 @@ def cargarDatos(ruta:str, separador:str=","):
         datos=archivo.readlines()
     for i, linea in enumerate(datos):
         datos[i]=linea.strip().split(separador)
-    return datos
+    return datos1
