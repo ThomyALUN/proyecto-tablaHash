@@ -17,3 +17,4 @@ def cargarDatos(ruta:str, separador:str=","):
     for i, linea in enumerate(datos):
         datos[i]=linea.strip().split(separador)
     return datos
+

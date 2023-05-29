@@ -1,11 +1,6 @@
-from funciones.general import *
-from tablaHash import TablaHash
-
+from funciones.funcionesTabla import *
 
 ruta = "ArchNombres1.txt"
-
-datos=cargarDatos(ruta)
-print(datos)
 
 while True:
     try:
@@ -14,16 +9,12 @@ while True:
     except ValueError:
         print("El valor debe ser un número")
     else:
-        if tamanio<len(datos):
+        if tamanio<longitudDatos(ruta):
             print("El tamaño no puede ser menor que la cantidad de datos")
         else:
             break
 
-tabla=TablaHash(1, tamanio, 2, 1, ruta)
-tabla.setPaso(3)
-for i in range(len(datos)):
-    num=datos[i][0]
-    tabla.ingresarDato(int(num),i+1)
+tabla=crearTabla(ruta, tamanio, 1, 3)
 print("")
 print(tabla)
 print("")

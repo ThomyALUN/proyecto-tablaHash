@@ -1,4 +1,4 @@
-from funciones.general import *
+from funciones.general import calcNumDigitos, cad2NumPeso
 from clases.claseListaEnlz import ListaNoOrd
 from clases.monticuloBinario import *
 
@@ -48,7 +48,7 @@ class TablaHash:
         while copiaclave>=1:
             suma+=copiaclave%pow(10,grupDig)
             copiaclave//=pow(10,grupDig)
-        ind=suma%self.tamanio
+        ind=int(suma)%self.tamanio
         return ind
     
     def hashCentro(self, clave:int):
