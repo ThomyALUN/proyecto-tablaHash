@@ -87,6 +87,8 @@ class TablaHash:
 
     def ingresarDato(self, clave, cargaUtil):
         '''Se encarga de insertar un elemento si no fue encontrado en la posición designada por su código hash'''
+        if self.tabla.count(None)==0 and self.colision!=3:
+            raise IndexError("No se pueden ingresar más datos")
         ind=self.calcularHash(clave)
         if self.tabla[ind]==None:
             if self.colision!=3:
@@ -166,7 +168,10 @@ class TablaHash:
         pos=0
         while len(posPosibles)>0:
             pos+=1
-            nuevoInd=(ind+pow(pos,2))%self.tamanio
+            if pos<10000:
+                nuevoInd=(ind+pow(pos,2))%self.tamanio
+            else:
+                nuevoInd=(ind+pos)%self.tamanio
             if nuevoInd in posPosibles:
                 if self.tabla[nuevoInd]==None:
                     self.tabla[nuevoInd]=[clave, cargaUtil]
