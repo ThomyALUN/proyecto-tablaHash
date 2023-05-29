@@ -1,6 +1,7 @@
 from funciones.general import *
 from tablaHash import TablaHash
 
+
 ruta = "ArchNombres1.txt"
 
 datos=cargarDatos(ruta)

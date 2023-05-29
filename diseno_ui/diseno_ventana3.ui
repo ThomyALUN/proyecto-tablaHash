@@ -167,13 +167,16 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
       <rect>
        <x>480</x>
        <y>190</y>
-       <width>113</width>
+       <width>171</width>
        <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(223, 223, 223);
-border-radius:6px;</string>
+font: 12pt &quot;MS Shell Dlg 2&quot;;
+border-radius:6px;
+color: rgb(0, 0, 127);
+</string>
      </property>
      <property name="text">
       <string/>
@@ -204,7 +207,7 @@ font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
       <rect>
        <x>480</x>
        <y>250</y>
-       <width>111</width>
+       <width>171</width>
        <height>21</height>
       </rect>
      </property>
@@ -213,8 +216,10 @@ font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(223, 223, 223);
+color: rgb(0, 0, 127);
 border-radius:6px;
-color: white</string>
+font: 12pt &quot;MS Shell Dlg 2&quot;;
+</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
@@ -241,7 +246,7 @@ font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
       <rect>
        <x>480</x>
        <y>309</y>
-       <width>111</width>
+       <width>171</width>
        <height>21</height>
       </rect>
      </property>
@@ -250,8 +255,9 @@ font: 70 15pt &quot;Rockwell Extra Bold&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">background-color: rgb(223, 223, 223);
+color: rgb(0, 0, 127);
 border-radius:6px;
-color: white</string>
+font: 12pt &quot;MS Shell Dlg 2&quot;;</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_7">
