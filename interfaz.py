@@ -397,8 +397,7 @@ class Ventana6(QMainWindow):
         self.cerrar.clicked.connect(inicio.exit)
         self.min.clicked.connect(self.minimizar)
         self.frame.mouseMoveEvent = self.moveWindow
-        self.clave = self.lineEdit.text()
-        #self.BSiguiente.clicked.connect(self.mostrarVentana5)
+        self.BSiguiente.clicked.connect(self.mostrarVentana7)
         #self.BAtras.clicked.connect(self.mostrarVentana3)
         self.hashTable = tabla
         self.BBuscar.clicked.connect(self.buscarDato)
@@ -407,6 +406,7 @@ class Ventana6(QMainWindow):
         self.clave = int(self.lineEdit.text())
         nombre = self.hashTable.buscarDato(self.clave)
         print(nombre)
+        self.mostrarConfirmacion(nombre)
         
     def minimizar(self):
         inicio.ventanaSubir.ventana3.widget.showMinimized()
@@ -440,7 +440,98 @@ class Ventana6(QMainWindow):
         self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
         self.ventana3.show()
         self.widget.show()
-        self.close()      
+        self.close()
+        
+    def mostrarVentana7(self):
+        self.ventana7 = Ventana7(self.hashTable)
+        self.ventana7.raise_()
+        size = self.ventana7.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana7)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana7.show()
+        self.widget.show()
+        self.close()
+        
+    def mostrarConfirmacion(self, mensaje):
+        self.confirmacion = Confirmacion(mensaje)
+        self.confirmacion.show()      
+
+class Ventana7(QMainWindow):
+    def __init__(self,tabla):
+        super().__init__()
+        self.widget = loadUi("diseno_ui\exportar.ui", self)
+        self.widget_size = self.widget.size()
+        self.setWindowTitle('ventana exportar')
+        self.cerrar.clicked.connect(inicio.exit)
+        self.min.clicked.connect(self.minimizar)
+        self.frame.mouseMoveEvent = self.moveWindow
+        #self.BSiguiente.clicked.connect(self.mostrarVentana5)
+        #self.BAtras.clicked.connect(self.mostrarVentana3)
+        self.hashTable = tabla
+        self.BExportar.clicked.connect(self.exportarArchivo)
+        
+    def exportarArchivo(self):
+        file_path = QFileDialog.getExistingDirectory(self, "Seleccionar carpeta donde guardar archivo")
+        if file_path:
+            nombre_archivo = 'ArchNombres1Index'
+            ruta_guardado = os.path.join(file_path, nombre_archivo)
+            self.hashTable.generarIndex(ruta_guardado)
+        else:
+            mensaje = "No se seleccionó ninguna carpeta"
+            self.advertencia = Advertencia(mensaje) 
+            self.advertencia.show()    
+        
+        #self.mostrarConfirmacion(nombre)
+        
+    
+        
+    def minimizar(self):
+        inicio.ventanaSubir.ventana3.widget.showMinimized()
+
+    def moveWindow(self, e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos() + e.globalPos() - self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+
+    def mostrarAdvertencia(self):
+        self.advertencia = Advertencia(self.mensaje)
+        self.advertencia.show()
+    
+    def mostrarVentana3(self):
+        self.ventana3 = Ventana3()
+        self.ventana3.raise_()
+        size = self.ventana3.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana3)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana3.show()
+        self.widget.show()
+        self.close()
+        
+    def mostrarConfirmacion(self, mensaje):
+        self.confirmacion = Confirmacion(mensaje)
+        self.confirmacion.show()   
+
+
     
 class Advertencia(QDialog):
     def __init__(self,mensaje):
@@ -470,7 +561,7 @@ class Advertencia(QDialog):
         
 class Confirmacion(QDialog):
     def __init__(self,mensaje):
-        super(Advertencia,self).__init__()
+        super(Confirmacion,self).__init__()
         loadUi("diseno_ui/confirmacion.ui", self)
         self.cerrar_6.clicked.connect(self.ocultar)
         self.setWindowFlag(Qt.FramelessWindowHint)
