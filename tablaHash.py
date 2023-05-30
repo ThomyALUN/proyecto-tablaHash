@@ -309,6 +309,7 @@ class TablaHash:
     def obtenerPrimeros(self, cantidad):
         '''Utiliza la ordenación por el método del montículo para organizar los códigos de la tabla. 
         Luego busca los datos de los n primeros y los retorna'''
+        self.generarMonticulo()
         vectorOrd=[]
         while self.mont.currentSize>0 and cantidad>0:
             clave=self.mont.delMin()
