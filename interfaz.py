@@ -1,6 +1,6 @@
 import sys
 import os
-from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow, QPushButton, QFileDialog,QVBoxLayout, QDialog, QListWidget
+from PyQt5.QtWidgets import QWidget, QApplication, QMainWindow, QPushButton, QFileDialog,QVBoxLayout, QDialog, QListWidget, QTableWidget, QTableWidgetItem
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -75,7 +75,8 @@ class VentanaSubir(QMainWindow):
         self.cerrar.clicked.connect(inicio.exit)
         self.min.clicked.connect(self.minimizar)
         self.frame.mouseMoveEvent = self.moveWindow
-        self.BSubir.clicked.connect(self.seleccionarArchivo)    
+        self.BSubir.clicked.connect(self.seleccionarArchivo) 
+           
 
     def seleccionarArchivo(self):
         dirPath = os.getcwd()  # Directorio de la carpeta actual
@@ -186,7 +187,7 @@ class Ventana3(QMainWindow):
             tamanio=int(tamanio)
             print(tamanio)
             if tamanio<len(self.datos):    
-                self.mensaje = "Tamaño mayor que los datos"
+                self.mensaje = "Tamaño menor que los datos"
                 self.mostrarAdvertencia()
                 self.lineEdit.clear()
             else:
@@ -194,15 +195,17 @@ class Ventana3(QMainWindow):
                 valorHash = self.tipoHash[hash]
                 colision = self.comboBox_2.currentText()
                 valorColision = self.tipoColisiones[colision]
-                tabla = TablaHash(1, tamanio, valorHash, valorColision,self.ruta)      
-                tabla.setPaso(3)
+                tablaHash = TablaHash(1, tamanio, valorHash, valorColision,self.ruta)      
+                tablaHash.setPaso(3)
                 for i in range(len(self.datos)):
                     num=self.datos[i][0]
-                    tabla.ingresarDato(int(num),i+1)
+                    tablaHash.ingresarDato(int(num),i+1)
                 print("")
+                tabla = tablaHash.getTabla()
                 print(tabla)
                 print("")
-                self.ventana4 = Ventana4()
+                print(len(tabla))
+                self.ventana4 = Ventana4(tablaHash, hash, colision)
                 self.ventana4.raise_()
                 size = self.ventana4.widget_size
                 self.widget = QtWidgets.QStackedWidget()
@@ -224,14 +227,10 @@ class Ventana3(QMainWindow):
             self.mostrarAdvertencia()
             self.lineEdit.clear()
             print(len(self.datos))
-            
-           
-            
-        
     
     
 class Ventana4(QMainWindow):
-    def __init__(self):
+    def __init__(self,tabla, hash, colision):
         super().__init__()
         self.widget = loadUi("diseno_ui\diseno_ventana4.ui", self)
         self.widget_size = self.widget.size()
@@ -241,6 +240,21 @@ class Ventana4(QMainWindow):
         self.frame.mouseMoveEvent = self.moveWindow
         #self.BSiguiente.clicked.connect(self.mostrarVentana5)
         self.BAtras.clicked.connect(self.mostrarVentana3)
+        self.hashTable = tabla
+        self.matriz = self.hashTable.getTabla()
+        self.tamanio = self.hashTable.getTamanio()
+        self.tipoHash = hash        
+        self.tipoColision = colision
+        self.colisiones = self.hashTable.getColisiones()
+        self.tableWidget.setRowCount(self.tamanio)
+        self.labelTamanio.setText(str(self.tamanio))
+        self.labelHashing.setText(self.tipoHash)
+        self.labelMetodoColisiones.setText(self.tipoColision)
+        self.labelColisiones.setText(str(self.colisiones))
+        for i in range(self.tamanio):
+            for j in range(2):
+                item = QTableWidgetItem(str(self.matriz[i][j]))
+                self.tableWidget.setItem(i, j, item)
             
     
     def minimizar(self):
