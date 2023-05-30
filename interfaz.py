@@ -238,7 +238,7 @@ class Ventana4(QMainWindow):
         self.cerrar.clicked.connect(inicio.exit)
         self.min.clicked.connect(self.minimizar)
         self.frame.mouseMoveEvent = self.moveWindow
-        #self.BSiguiente.clicked.connect(self.mostrarVentana5)
+        self.BSiguiente.clicked.connect(self.mostrarVentana5)
         self.BAtras.clicked.connect(self.mostrarVentana3)
         self.hashTable = tabla
         self.matriz = self.hashTable.getTabla()
@@ -252,6 +252,85 @@ class Ventana4(QMainWindow):
         self.labelMetodoColisiones.setText(self.tipoColision)
         self.labelColisiones.setText(str(self.colisiones))
         for i in range(self.tamanio):
+            if self.matriz[i] == None:
+                item = QTableWidgetItem(str("None"))
+                item_2 = QTableWidgetItem(str("None"))
+                self.tableWidget.setItem(i, 0, item)
+                self.tableWidget.setItem(i, 1, item_2)
+            else:
+                for j in range(2):
+                    item = QTableWidgetItem(str(self.matriz[i][j]))
+                    self.tableWidget.setItem(i, j, item)
+                
+    
+    def minimizar(self):
+        inicio.ventanaSubir.ventana3.widget.showMinimized()
+
+    def moveWindow(self, e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos() + e.globalPos() - self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+
+    def mostrarAdvertencia(self):
+        self.advertencia = Advertencia(self.mensaje)
+        self.advertencia.show()
+    
+    def mostrarVentana3(self):
+        self.ventana3 = Ventana3()
+        self.ventana3.raise_()
+        size = self.ventana3.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana3)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana3.show()
+        self.widget.show()
+        self.close()
+        
+    def mostrarVentana5(self):
+        self.ventana5 = Ventana5(self.hashTable)
+        self.ventana5.raise_()
+        size = self.ventana5.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana5)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana5.show()
+        self.widget.show()
+        self.close()
+    
+    
+        
+class Ventana5(QMainWindow):
+    def __init__(self,tabla):
+        super().__init__()
+        self.widget = loadUi("diseno_ui\diseno_ventana5.ui", self)
+        self.widget_size = self.widget.size()
+        self.setWindowTitle('ventana 5')
+        self.cerrar.clicked.connect(inicio.exit)
+        self.min.clicked.connect(self.minimizar)
+        self.frame.mouseMoveEvent = self.moveWindow
+        self.BSiguiente.clicked.connect(self.mostrarVentana6)
+        self.BAtras.clicked.connect(self.mostrarVentana3)
+        self.hashTable = tabla
+        self.matriz = self.hashTable.obtenerPrimeros(10)
+        for i in range(10):
             for j in range(2):
                 item = QTableWidgetItem(str(self.matriz[i][j]))
                 self.tableWidget.setItem(i, j, item)
@@ -289,7 +368,79 @@ class Ventana4(QMainWindow):
         self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
         self.ventana3.show()
         self.widget.show()
+        self.close()   
+        
+    def mostrarVentana6(self):
+        self.ventana6 = Ventana6(self.hashTable)
+        self.ventana6.raise_()
+        size = self.ventana6.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana6)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana6.show()
+        self.widget.show()
         self.close()
+        
+class Ventana6(QMainWindow):
+    def __init__(self,tabla):
+        super().__init__()
+        self.widget = loadUi("diseno_ui\diseno_ventana6.ui", self)
+        self.widget_size = self.widget.size()
+        self.setWindowTitle('ventana 6')
+        self.cerrar.clicked.connect(inicio.exit)
+        self.min.clicked.connect(self.minimizar)
+        self.frame.mouseMoveEvent = self.moveWindow
+        self.clave = self.lineEdit.text()
+        #self.BSiguiente.clicked.connect(self.mostrarVentana5)
+        #self.BAtras.clicked.connect(self.mostrarVentana3)
+        self.hashTable = tabla
+        self.BBuscar.clicked.connect(self.buscarDato)
+        
+    def buscarDato(self):
+        self.clave = int(self.lineEdit.text())
+        nombre = self.hashTable.buscarDato(self.clave)
+        print(nombre)
+        
+    def minimizar(self):
+        inicio.ventanaSubir.ventana3.widget.showMinimized()
+
+    def moveWindow(self, e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos() + e.globalPos() - self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+
+    def mostrarAdvertencia(self):
+        self.advertencia = Advertencia(self.mensaje)
+        self.advertencia.show()
+    
+    def mostrarVentana3(self):
+        self.ventana3 = Ventana3()
+        self.ventana3.raise_()
+        size = self.ventana3.widget_size
+        self.widget = QtWidgets.QStackedWidget()
+        self.widget.addWidget(self.ventana3)
+        self.widget.setFixedSize(size)
+        rec = app.desktop().screenGeometry()
+        self.widget.move(int((rec.width() - self.widget.width()) / 2), 
+                    int((rec.height() - self.widget.height()) / 2))
+        
+        self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
+        self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
+        self.ventana3.show()
+        self.widget.show()
+        self.close()      
     
 class Advertencia(QDialog):
     def __init__(self,mensaje):
@@ -300,6 +451,32 @@ class Advertencia(QDialog):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.widget.mouseMoveEvent = self.moveWindow
         self.label_6.setText(mensaje)
+
+    def moveWindow(self,e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos()+e.globalPos()-self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+                
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+    
+    def keyPressEvent(self, qKeyEvent):
+        if qKeyEvent.key() == QtCore.Qt.Key_Return:
+            self.gui()
+
+    def ocultar(self):
+        self.close()
+        
+class Confirmacion(QDialog):
+    def __init__(self,mensaje):
+        super(Advertencia,self).__init__()
+        loadUi("diseno_ui/confirmacion.ui", self)
+        self.cerrar_6.clicked.connect(self.ocultar)
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.mouseMoveEvent = self.moveWindow
+        self.label_2.setText(mensaje)
 
     def moveWindow(self,e):
         if e.buttons() == Qt.LeftButton:
