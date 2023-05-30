@@ -30,3 +30,5 @@ print(tabla)
 print("")
 print(tabla.getTabla())
 print(tabla.obtenerPrimeros(5))
+if tabla.colision==3:
+    print(tabla.obtenerListaEn(709))

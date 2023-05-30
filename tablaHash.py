@@ -317,6 +317,15 @@ class TablaHash:
             vectorOrd.append([clave, datos])
             cantidad-=1
         return vectorOrd
+    
+    def obtenerListaEn(self, clave):
+        '''Recupera todos los datos relacionados con una lista enlazada al interior de la tabla hash'''
+        ind=self.calcularHash(clave)
+        dato=self.tabla[ind]
+        if dato!=None:
+            return dato.convertirListaNormal()
+        else:
+            return None
 
     def setPaso(self, paso:int):
         '''Modifica el valor del paso para el método de hashing según el parámetro ingresado'''
@@ -350,10 +359,36 @@ class TablaHash:
         return datos
     
 if __name__=="__main__":
-    tabla=TablaHash(11,0,3,"")
-    lista=[54,26,93,17,77,31,44,55,20]
-    for i,dato in enumerate(lista):
-        tabla.ingresarDato(dato,i)
+    from funciones.funcionesTabla import *
+
+    ruta = "ArchNombres1.txt"
+
+    while True:
+        try:
+            tamanio=input("Ingrese el tamaño de la tabla: ")
+            tamanio=int(tamanio)
+        except ValueError:
+            print("El valor debe ser un número")
+        else:
+            if tamanio<longitudDatos(ruta):
+                print("El tamaño no puede ser menor que la cantidad de datos")
+            else:
+                break
+
+    tabla=crearTabla(ruta, tamanio, 1, 3)
+    print("")
+    print(tabla)
+    print("")
     print(tabla.getTabla())
-    for dato in tabla.getTabla():
-        print(dato)
+    tabla.generarIndex("ArchNombres1Index")
+    print(tabla.buscarDato(990))
+
+    print("")
+    tabla.cargarIndex("ArchNombres1Index.txt")  
+    print(tabla.buscarDato(990))
+    print("")
+    print(tabla)
+    print("")
+    print(tabla.getTabla())
+    print(tabla.obtenerPrimeros(5))
+    print(tabla.obtenerListaEn(709))
