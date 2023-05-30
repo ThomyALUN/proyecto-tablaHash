@@ -36,6 +36,15 @@ class ListaNoOrd:
                 cadena+=f"{actual.getClave()}: {actual.getInfo()}, "
             actual=actual.getSiguiente()
         return cadena
+    
+    def convertirListaNormal(self):
+        '''Retorna una lista nativa de python a partir de la lista enlazada'''
+        lista=[]
+        actual=self.cabeza
+        while actual!=None:
+            lista.append([actual.getClave(),actual.getInfo()])
+            actual=actual.getSiguiente()
+        return lista
 
     def tamanio(self):
         '''Retorna el tamaño (cantidad de elementos) de la lista enlazada'''
