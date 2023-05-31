@@ -141,7 +141,7 @@ class TablaHash:
                     cargaUtil=None
                 else:
                     cargaUtil=self.tabla[ind].recuperarInfo(pos)
-        if self.tipo==0 or pos==-1:
+        if self.tipo==0 or pos==-1 or cargaUtil==None:
             return cargaUtil    # return None
         else:
             with open(self.ruta,"r", encoding="utf-8") as archivo:
