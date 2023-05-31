@@ -162,25 +162,6 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
       </widget>
      </widget>
     </widget>
-    <widget class="QPushButton" name="BSiguiente">
-     <property name="geometry">
-      <rect>
-       <x>780</x>
-       <y>230</y>
-       <width>51</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">border-image: url(:/tablaHash/proximo (1).png);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QPushButton" name="BAtras">
      <property name="geometry">
       <rect>

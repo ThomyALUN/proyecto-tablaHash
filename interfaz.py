@@ -153,7 +153,7 @@ class Ventana3(QMainWindow):
         self.datos = datos
         self.ruta = ruta
         self.tipoHash = {"modulo del tamaño": 0, "plegado":1, "centro del cuadrado": 2}
-        self.tipoColisiones = {"prueba lineal": 0,"rehashing":1,"sondeo cuadrático":2,"Encadenamiento":3}
+        self.tipoColisiones = {"prueba lineal": 0,"rehashing":1,"sondeo cuadrático":2,"encadenamiento":3}
         for tipo in self.tipoHash:
             print(tipo)
             self.comboBox.addItem(tipo)
@@ -246,11 +246,17 @@ class Ventana4(QMainWindow):
         self.tipoHash = hash        
         self.tipoColision = colision
         self.colisiones = self.hashTable.getColisiones()
+        self.factorCarga = round(self.hashTable.getOcupacion()*100, 2)
         self.tableWidget.setRowCount(self.tamanio)
         self.labelTamanio.setText(str(self.tamanio))
         self.labelHashing.setText(self.tipoHash)
         self.labelMetodoColisiones.setText(self.tipoColision)
         self.labelColisiones.setText(str(self.colisiones))
+        self.labelFactorCarga.setText(str(self.factorCarga)+"%")
+        if self.tipoColision == "encadenamiento":
+            self.tableWidget.cellClicked.connect(self.mostrarListaEnlazada)
+        
+        
         for i in range(self.tamanio):
             if self.matriz[i] == None:
                 item = QTableWidgetItem(str("None"))
@@ -258,10 +264,30 @@ class Ventana4(QMainWindow):
                 self.tableWidget.setItem(i, 0, item)
                 self.tableWidget.setItem(i, 1, item_2)
             else:
-                for j in range(2):
-                    item = QTableWidgetItem(str(self.matriz[i][j]))
-                    self.tableWidget.setItem(i, j, item)
+                if self.tipoColision == "encadenamiento":
+                    if self.matriz[i].tamanio()== 1:
+                        valor = self.matriz[i].getCabeza()
+                        item = QTableWidgetItem(str(valor.getClave()))
+                        item_2 = QTableWidgetItem(str(valor.getInfo()))
+                        self.tableWidget.setItem(i, 0, item)
+                        self.tableWidget.setItem(i, 1, item_2)
+                    else:
+                        item = QTableWidgetItem(str("Lista"))
+                        item_2 = QTableWidgetItem(str("Enlazada"))
+                        self.tableWidget.setItem(i, 0, item)
+                        self.tableWidget.setItem(i, 1, item_2)
+                    
+                else:
+                    for j in range(2):
+                        item = QTableWidgetItem(str(self.matriz[i][j]))
+                        self.tableWidget.setItem(i, j, item)
                 
+    def mostrarListaEnlazada(self, row, col):
+        if self.matriz[row] != None:
+            clave = self.matriz[row].getCabeza().getClave()
+            lista = self.hashTable.obtenerListaEn(clave)
+            self.listaEnlazada = ListaEnlazada(lista)
+            self.listaEnlazada.show()
     
     def minimizar(self):
         inicio.ventanaSubir.ventana3.widget.showMinimized()
@@ -491,8 +517,6 @@ class Ventana7(QMainWindow):
         
         #self.mostrarConfirmacion(nombre)
         
-    
-        
     def minimizar(self):
         inicio.ventanaSubir.ventana3.widget.showMinimized()
 
@@ -531,8 +555,38 @@ class Ventana7(QMainWindow):
         self.confirmacion = Confirmacion(mensaje)
         self.confirmacion.show()   
 
-
+class ListaEnlazada(QDialog):
+    def __init__(self,lista):
+        super(ListaEnlazada,self).__init__()
+        loadUi("diseno_ui/diseno_lista.ui", self)
+        self.cerrar.clicked.connect(self.ocultar)
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.mouseMoveEvent = self.moveWindow
+        self.lista = lista
+        for i in range(len(lista)):
+            for j in range(2):
+                item = QTableWidgetItem(str(self.lista[i][j]))
+                self.tableWidget.setItem(i, j, item)
+            
+    def moveWindow(self,e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos()+e.globalPos()-self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+                
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
     
+    def keyPressEvent(self, qKeyEvent):
+        if qKeyEvent.key() == QtCore.Qt.Key_Return:
+            self.gui()
+    def minimizar(self):
+        self.widget.showMinimized()
+    def ocultar(self):
+        self.close()
+
+
 class Advertencia(QDialog):
     def __init__(self,mensaje):
         super(Advertencia,self).__init__()

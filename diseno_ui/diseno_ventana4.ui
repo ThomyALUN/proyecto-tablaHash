@@ -203,8 +203,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>70</y>
+       <x>210</x>
+       <y>50</y>
        <width>111</width>
        <height>51</height>
       </rect>
@@ -221,8 +221,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>160</y>
+       <x>160</x>
+       <y>130</y>
        <width>221</width>
        <height>51</height>
       </rect>
@@ -239,8 +239,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>250</y>
+       <x>130</x>
+       <y>210</y>
        <width>301</width>
        <height>51</height>
       </rect>
@@ -257,8 +257,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="Line" name="line_5">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>130</y>
+       <x>140</x>
+       <y>110</y>
        <width>261</width>
        <height>31</height>
       </rect>
@@ -270,8 +270,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="Line" name="line_7">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>220</y>
+       <x>140</x>
+       <y>190</y>
        <width>271</width>
        <height>31</height>
       </rect>
@@ -283,8 +283,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="Line" name="line_8">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>310</y>
+       <x>140</x>
+       <y>270</y>
        <width>291</width>
        <height>31</height>
       </rect>
@@ -296,8 +296,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="labelMetodoColisiones">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>290</y>
+       <x>170</x>
+       <y>250</y>
        <width>261</width>
        <height>31</height>
       </rect>
@@ -314,8 +314,8 @@ font: 70 12pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="labelHashing">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>200</y>
+       <x>200</x>
+       <y>170</y>
        <width>211</width>
        <height>31</height>
       </rect>
@@ -332,8 +332,8 @@ font: 70 12pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="labelTamanio">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>110</y>
+       <x>240</x>
+       <y>90</y>
        <width>61</width>
        <height>31</height>
       </rect>
@@ -351,7 +351,7 @@ font: 70 12pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QTableWidget" name="tableWidget">
      <property name="geometry">
       <rect>
-       <x>450</x>
+       <x>480</x>
        <y>40</y>
        <width>221</width>
        <height>391</height>
@@ -565,8 +565,8 @@ QTableWidget::item {
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>340</y>
+       <x>200</x>
+       <y>370</y>
        <width>211</width>
        <height>51</height>
       </rect>
@@ -583,8 +583,8 @@ font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="labelColisiones">
      <property name="geometry">
       <rect>
-       <x>220</x>
-       <y>380</y>
+       <x>250</x>
+       <y>410</y>
        <width>131</width>
        <height>31</height>
       </rect>
@@ -601,8 +601,57 @@ font: 70 12pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="Line" name="line_9">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>400</y>
+       <x>140</x>
+       <y>430</y>
+       <width>291</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>290</y>
+       <width>251</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color:white;
+font: 90 15pt &quot;Rockwell Extra Bold&quot;;</string>
+     </property>
+     <property name="text">
+      <string>FACTOR DE CARGA</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelFactorCarga">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>330</y>
+       <width>131</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 14pt &quot;Lucida Console&quot;;
+color: rgb(0, 0, 125);
+font: 70 12pt &quot;Rockwell Extra Bold&quot;;</string>
+     </property>
+     <property name="text">
+      <string>48</string>
+     </property>
+    </widget>
+    <widget class="Line" name="line_10">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>350</y>
        <width>291</width>
        <height>31</height>
       </rect>

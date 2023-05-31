@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>330</width>
+    <height>389</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>291</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>ArrowCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QWidget#widget{
+	background-color: rgb(16, 16, 16);
+	background-color: rgb(6, 6, 6);
+	background-color: rgb(0, 76, 227);
+	border-radius:20px;
+	border: 1px solid white;
+}</string>
+   </property>
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>271</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame#frame{
+background-color: rgb(16, 16, 16);
+background-color: rgb(6, 6, 6);
+	background-color: rgb(0, 76, 227);
+border-radius:20px;
+}</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="cerrar">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>0</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#cerrar{
+background-color: rgb(255, 0, 0);
+border-radius:6px;
+
+font: 11pt &quot;MS Shell Dlg 2&quot;;
+background-color: rgb(0, 0, 125);
+color:white;
+
+}</string>
+     </property>
+     <property name="text">
+      <string>x</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="min">
+     <property name="geometry">
+      <rect>
+       <x>180</x>
+       <y>0</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton#min{
+	background-color: rgb(173, 173, 173);
+font: 16pt &quot;MS Shell Dlg 2&quot;;
+border-radius:6px;
+
+color: white;
+
+
+}</string>
+     </property>
+     <property name="text">
+      <string>-</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>50</y>
+      <width>211</width>
+      <height>241</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableWidget {
+	background-color: rgb(0, 0, 125);
+	color:white;
+	font: 75 14pt &quot;Berlin Sans FB Demi&quot;;
+	
+	gridline-color: rgb(173, 173, 173);
+	border-color: rgb(186, 186, 186);
+}
+
+QHeaderView::section {
+	color: rgb(0, 0, 127);
+	background-color: rgb(173, 173, 173);
+	font-size:12pt
+	
+	
+}
+QTableWidget::item {
+    background-color: rgb(0, 0, 125);
+	color: rgb(218, 218, 218);
+}</string>
+    </property>
+    <attribute name="horizontalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="horizontalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="horizontalHeaderStretchLastSection">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderHighlightSections">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderStretchLastSection">
+     <bool>false</bool>
+    </attribute>
+    <row>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>2</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>3</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>5</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>6</string>
+     </property>
+    </row>
+    <row>
+     <property name="text">
+      <string>7</string>
+     </property>
+    </row>
+    <column>
+     <property name="text">
+      <string>CLAVE</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>INDICE</string>
+     </property>
+    </column>
+    <item row="0" column="0">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+    <item row="0" column="1">
+     <property name="text">
+      <string/>
+     </property>
+    </item>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
