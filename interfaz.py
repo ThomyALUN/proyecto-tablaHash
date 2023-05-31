@@ -151,6 +151,7 @@ class Ventana3(QMainWindow):
         self.frame.mouseMoveEvent = self.moveWindow
         self.BSiguiente.clicked.connect(self.mostrarVentana4)
         self.datos = datos
+        self.datos2 = datos
         self.ruta = ruta
         self.tipoHash = {"modulo del tamaño": 0, "plegado":1, "centro del cuadrado": 2}
         self.tipoColisiones = {"prueba lineal": 0,"rehashing":1,"sondeo cuadrático":2,"encadenamiento":3}
@@ -205,7 +206,7 @@ class Ventana3(QMainWindow):
                 print(tabla)
                 print("")
                 print(len(tabla))
-                self.ventana4 = Ventana4(tablaHash, hash, colision)
+                self.ventana4 = Ventana4(tablaHash, hash, colision,self.datos2, self.ruta)
                 self.ventana4.raise_()
                 size = self.ventana4.widget_size
                 self.widget = QtWidgets.QStackedWidget()
@@ -230,7 +231,7 @@ class Ventana3(QMainWindow):
     
     
 class Ventana4(QMainWindow):
-    def __init__(self,tabla, hash, colision):
+    def __init__(self,tabla, hash, colision,datos,ruta):
         super().__init__()
         self.widget = loadUi("diseno_ui\diseno_ventana4.ui", self)
         self.widget_size = self.widget.size()
@@ -241,6 +242,8 @@ class Ventana4(QMainWindow):
         self.BSiguiente.clicked.connect(self.mostrarVentana5)
         self.BAtras.clicked.connect(self.mostrarVentana3)
         self.hashTable = tabla
+        self.datos = datos
+        self.ruta = ruta
         self.matriz = self.hashTable.getTabla()
         self.tamanio = self.hashTable.getTamanio()
         self.tipoHash = hash        
@@ -306,7 +309,7 @@ class Ventana4(QMainWindow):
         self.advertencia.show()
     
     def mostrarVentana3(self):
-        self.ventana3 = Ventana3()
+        self.ventana3 = Ventana3(self.datos, self.ruta)
         self.ventana3.raise_()
         size = self.ventana3.widget_size
         self.widget = QtWidgets.QStackedWidget()
@@ -324,7 +327,7 @@ class Ventana4(QMainWindow):
         self.close()
         
     def mostrarVentana5(self):
-        self.ventana5 = Ventana5(self.hashTable)
+        self.ventana5 = Ventana5(self.hashTable,self.tipoHash,self.tipoColision,self.datos,self.ruta)
         self.ventana5.raise_()
         size = self.ventana5.widget_size
         self.widget = QtWidgets.QStackedWidget()
@@ -344,7 +347,7 @@ class Ventana4(QMainWindow):
     
         
 class Ventana5(QMainWindow):
-    def __init__(self,tabla):
+    def __init__(self,tabla,hash,colision,datos,ruta):
         super().__init__()
         self.widget = loadUi("diseno_ui\diseno_ventana5.ui", self)
         self.widget_size = self.widget.size()
@@ -353,8 +356,12 @@ class Ventana5(QMainWindow):
         self.min.clicked.connect(self.minimizar)
         self.frame.mouseMoveEvent = self.moveWindow
         self.BSiguiente.clicked.connect(self.mostrarVentana6)
-        self.BAtras.clicked.connect(self.mostrarVentana3)
+        self.BAtras.clicked.connect(self.mostrarVentana4)
         self.hashTable = tabla
+        self.hash = hash
+        self.colision = colision
+        self.datos = datos 
+        self.ruta = ruta
         self.matriz = self.hashTable.obtenerPrimeros(10)
         for i in range(10):
             for j in range(2):
@@ -378,12 +385,12 @@ class Ventana5(QMainWindow):
         self.advertencia = Advertencia(self.mensaje)
         self.advertencia.show()
     
-    def mostrarVentana3(self):
-        self.ventana3 = Ventana3()
-        self.ventana3.raise_()
-        size = self.ventana3.widget_size
+    def mostrarVentana4(self):
+        self.ventana4 = Ventana4(self.hashTable, self.hash, self.colision, self.datos, self.ruta)
+        self.ventana4.raise_()
+        size = self.ventana4.widget_size
         self.widget = QtWidgets.QStackedWidget()
-        self.widget.addWidget(self.ventana3)
+        self.widget.addWidget(self.ventana4)
         self.widget.setFixedSize(size)
         rec = app.desktop().screenGeometry()
         self.widget.move(int((rec.width() - self.widget.width()) / 2), 
@@ -392,12 +399,12 @@ class Ventana5(QMainWindow):
         self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
-        self.ventana3.show()
+        self.ventana4.show()
         self.widget.show()
         self.close()   
         
     def mostrarVentana6(self):
-        self.ventana6 = Ventana6(self.hashTable)
+        self.ventana6 = Ventana6(self.hashTable, self.hash, self.colision, self.datos, self.ruta)
         self.ventana6.raise_()
         size = self.ventana6.widget_size
         self.widget = QtWidgets.QStackedWidget()
@@ -415,7 +422,7 @@ class Ventana5(QMainWindow):
         self.close()
         
 class Ventana6(QMainWindow):
-    def __init__(self,tabla):
+    def __init__(self,tabla,hash,colision,datos,ruta):
         super().__init__()
         self.widget = loadUi("diseno_ui\diseno_ventana6.ui", self)
         self.widget_size = self.widget.size()
@@ -424,15 +431,22 @@ class Ventana6(QMainWindow):
         self.min.clicked.connect(self.minimizar)
         self.frame.mouseMoveEvent = self.moveWindow
         self.BSiguiente.clicked.connect(self.mostrarVentana7)
-        #self.BAtras.clicked.connect(self.mostrarVentana3)
+        self.BAtras.clicked.connect(self.mostrarVentana5)
         self.hashTable = tabla
+        self.hash = hash
+        self.colision = colision
+        self.datos = datos 
+        self.ruta = ruta
         self.BBuscar.clicked.connect(self.buscarDato)
         
     def buscarDato(self):
         self.clave = int(self.lineEdit.text())
         nombre = self.hashTable.buscarDato(self.clave)
-        print(nombre)
-        self.mostrarConfirmacion(nombre)
+        if nombre == None:
+            mensaje = "  No se pudo encontrar la clave"
+            self.mostrarAdvertencia(mensaje)
+        else:
+            self.mostrarConfirmacion(nombre)
         
     def minimizar(self):
         inicio.ventanaSubir.ventana3.widget.showMinimized()
@@ -446,16 +460,16 @@ class Ventana6(QMainWindow):
     def mousePressEvent(self, event):
         self.clickPosition = event.globalPos()
 
-    def mostrarAdvertencia(self):
-        self.advertencia = Advertencia(self.mensaje)
+    def mostrarAdvertencia(self,mensaje):
+        self.advertencia = Advertencia(mensaje)
         self.advertencia.show()
     
-    def mostrarVentana3(self):
-        self.ventana3 = Ventana3()
-        self.ventana3.raise_()
-        size = self.ventana3.widget_size
+    def mostrarVentana5(self):
+        self.ventana5 = Ventana5(self.hashTable, self.hash, self.colision, self.datos, self.ruta)
+        self.ventana5.raise_()
+        size = self.ventana5.widget_size
         self.widget = QtWidgets.QStackedWidget()
-        self.widget.addWidget(self.ventana3)
+        self.widget.addWidget(self.ventana5)
         self.widget.setFixedSize(size)
         rec = app.desktop().screenGeometry()
         self.widget.move(int((rec.width() - self.widget.width()) / 2), 
@@ -464,12 +478,12 @@ class Ventana6(QMainWindow):
         self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
-        self.ventana3.show()
+        self.ventana5.show()
         self.widget.show()
         self.close()
         
     def mostrarVentana7(self):
-        self.ventana7 = Ventana7(self.hashTable)
+        self.ventana7 = Ventana7(self.hashTable,self.hash, self.colision, self.datos, self.ruta)
         self.ventana7.raise_()
         size = self.ventana7.widget_size
         self.widget = QtWidgets.QStackedWidget()
@@ -488,10 +502,11 @@ class Ventana6(QMainWindow):
         
     def mostrarConfirmacion(self, mensaje):
         self.confirmacion = Confirmacion(mensaje)
-        self.confirmacion.show()      
+        self.confirmacion.show()
+                        
 
 class Ventana7(QMainWindow):
-    def __init__(self,tabla):
+    def __init__(self,tabla,hash,colision,datos,ruta):
         super().__init__()
         self.widget = loadUi("diseno_ui\exportar.ui", self)
         self.widget_size = self.widget.size()
@@ -499,9 +514,12 @@ class Ventana7(QMainWindow):
         self.cerrar.clicked.connect(inicio.exit)
         self.min.clicked.connect(self.minimizar)
         self.frame.mouseMoveEvent = self.moveWindow
-        #self.BSiguiente.clicked.connect(self.mostrarVentana5)
-        #self.BAtras.clicked.connect(self.mostrarVentana3)
+        self.BAtras.clicked.connect(self.mostrarVentana6)
         self.hashTable = tabla
+        self.hash = hash
+        self.colision = colision
+        self.datos = datos 
+        self.ruta = ruta
         self.BExportar.clicked.connect(self.exportarArchivo)
         
     def exportarArchivo(self):
@@ -510,6 +528,8 @@ class Ventana7(QMainWindow):
             nombre_archivo = 'ArchNombres1Index'
             ruta_guardado = os.path.join(file_path, nombre_archivo)
             self.hashTable.generarIndex(ruta_guardado)
+            mensaje = "Archivo exportado"
+            self.mostrarConfirmacion(mensaje)
         else:
             mensaje = "No se seleccionó ninguna carpeta"
             self.advertencia = Advertencia(mensaje) 
@@ -533,12 +553,12 @@ class Ventana7(QMainWindow):
         self.advertencia = Advertencia(self.mensaje)
         self.advertencia.show()
     
-    def mostrarVentana3(self):
-        self.ventana3 = Ventana3()
-        self.ventana3.raise_()
-        size = self.ventana3.widget_size
+    def mostrarVentana6(self):
+        self.ventana6 = Ventana6(self.hashTable,self.hash, self.colision, self.datos, self.ruta)
+        self.ventana6.raise_()
+        size = self.ventana6.widget_size
         self.widget = QtWidgets.QStackedWidget()
-        self.widget.addWidget(self.ventana3)
+        self.widget.addWidget(self.ventana6)
         self.widget.setFixedSize(size)
         rec = app.desktop().screenGeometry()
         self.widget.move(int((rec.width() - self.widget.width()) / 2), 
@@ -547,12 +567,12 @@ class Ventana7(QMainWindow):
         self.widget.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.widget.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.widget.setGeometry(QtWidgets.QStyle.alignedRect(QtCore.Qt.LeftToRight, QtCore.Qt.AlignCenter, self.widget.size(), QtWidgets.qApp.desktop().availableGeometry()))
-        self.ventana3.show()
+        self.ventana6.show()
         self.widget.show()
         self.close()
         
     def mostrarConfirmacion(self, mensaje):
-        self.confirmacion = Confirmacion(mensaje)
+        self.confirmacion = Confirmacion2(mensaje)
         self.confirmacion.show()   
 
 class ListaEnlazada(QDialog):
@@ -622,6 +642,32 @@ class Confirmacion(QDialog):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.widget.mouseMoveEvent = self.moveWindow
         self.label_2.setText(mensaje)
+
+    def moveWindow(self,e):
+        if e.buttons() == Qt.LeftButton:
+            self.move(self.pos()+e.globalPos()-self.clickPosition)
+            self.clickPosition = e.globalPos()
+            e.accept()
+                
+    def mousePressEvent(self, event):
+        self.clickPosition = event.globalPos()
+    
+    def keyPressEvent(self, qKeyEvent):
+        if qKeyEvent.key() == QtCore.Qt.Key_Return:
+            self.gui()
+
+    def ocultar(self):
+        self.close()
+        
+class Confirmacion2(QDialog):
+    def __init__(self,mensaje):
+        super(Confirmacion2,self).__init__()
+        loadUi("diseno_ui/confirmacion2.ui", self)
+        self.cerrar_6.clicked.connect(self.ocultar)
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.widget.mouseMoveEvent = self.moveWindow
+        self.label.setText(mensaje)
 
     def moveWindow(self,e):
         if e.buttons() == Qt.LeftButton:

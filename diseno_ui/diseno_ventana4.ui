@@ -314,7 +314,7 @@ font: 70 12pt &quot;Rockwell Extra Bold&quot;;</string>
     <widget class="QLabel" name="labelHashing">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>170</x>
        <y>170</y>
        <width>211</width>
        <height>31</height>
